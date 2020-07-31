@@ -7,14 +7,15 @@
 //
 
 #import "ViewController.h"
-#import "doublesky_rtmp_push.h"
+#include "doublesky_rtmp.hpp"
+
 
 @interface ViewController ()
 {
     FILE *fp;
     NSThread *thread;
     bool push;
-    doublesky_rtmp_push *rtmp;
+    doublesky_rtmp rtmp;
 }
 @end
 
@@ -30,13 +31,12 @@
     UIWebView *web = [[UIWebView alloc] init];
     [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"www.baidu.com"]]];
     
+    self.view.backgroundColor = [UIColor blackColor];
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 200, 50)];
     [btn setTitle:@"开始推流" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(btn_click:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
-    
-    rtmp = [[doublesky_rtmp_push alloc] init];
 }
 
 - (void)btn_click:(UIButton *)tmp
@@ -46,11 +46,11 @@
         push = false;
         [thread cancel];
         
-        [rtmp stop_rtmp];
+        rtmp.stop_rtmp();
     }
     else
     {
-        if ([rtmp start_rtmp] != 0)
+        if (rtmp.start_rtmp() != 0)
             return;
         
         fseek(fp, 0, SEEK_SET);
@@ -90,7 +90,7 @@
             }
         }
         
-        [rtmp push_buffer:b size:size is_video:true];
+        rtmp.push_buffer(b, size, true);
         if (b) free(b);
         
         usleep(30*1000);
@@ -102,7 +102,7 @@
 - (int)getNalu:(FILE *)fp :(char **)b {
     int size = -1;
     
-    char *tmpBuffer = calloc(1024*500, sizeof(char));
+    char *tmpBuffer = (char*)calloc(1024*500, sizeof(char));
     if (!tmpBuffer)
         return size;
     
@@ -127,7 +127,7 @@
                 else
                     size = current-begin-startCodeSize;
                 
-                *b = calloc(size, sizeof(char));
+                *b = (char*)calloc(size, sizeof(char));
                 if (!(*b))
                     goto getNaluEnd;
                 

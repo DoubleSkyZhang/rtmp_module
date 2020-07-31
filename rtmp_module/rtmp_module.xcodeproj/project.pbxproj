@@ -9,14 +9,13 @@
 /* Begin PBXBuildFile section */
 		3A095E3024CD862C003FC082 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A095E2F24CD862C003FC082 /* AppDelegate.m */; };
 		3A095E3324CD862C003FC082 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A095E3224CD862C003FC082 /* SceneDelegate.m */; };
-		3A095E3624CD862C003FC082 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A095E3524CD862C003FC082 /* ViewController.m */; };
+		3A095E3624CD862C003FC082 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A095E3524CD862C003FC082 /* ViewController.mm */; };
 		3A095E3924CD862C003FC082 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A095E3724CD862C003FC082 /* Main.storyboard */; };
 		3A095E3B24CD862F003FC082 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A095E3A24CD862F003FC082 /* Assets.xcassets */; };
 		3A095E3E24CD862F003FC082 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A095E3C24CD862F003FC082 /* LaunchScreen.storyboard */; };
 		3A095E4124CD862F003FC082 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A095E4024CD862F003FC082 /* main.m */; };
 		3A095E4B24CD862F003FC082 /* rtmp_moduleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A095E4A24CD862F003FC082 /* rtmp_moduleTests.m */; };
 		3A095E5624CD862F003FC082 /* rtmp_moduleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A095E5524CD862F003FC082 /* rtmp_moduleUITests.m */; };
-		3A095E6524CD88F7003FC082 /* doublesky_rtmp_push.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A095E6424CD88F6003FC082 /* doublesky_rtmp_push.mm */; };
 		3A095ECF24CD890B003FC082 /* libfdk-aac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A095E6E24CD890A003FC082 /* libfdk-aac.a */; };
 		3A095ED024CD890B003FC082 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A095E7424CD890A003FC082 /* libx264.a */; };
 		3A095ED124CD890B003FC082 /* libswscale.pc in Resources */ = {isa = PBXBuildFile; fileRef = 3A095EC524CD890B003FC082 /* libswscale.pc */; };
@@ -33,6 +32,7 @@
 		3A095EE024CD8A6D003FC082 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A095EDD24CD8A21003FC082 /* libiconv.tbd */; };
 		3A095EE124CD8A95003FC082 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A095EDC24CD8A17003FC082 /* libbz2.tbd */; };
 		3A095EE324CD8DAE003FC082 /* test.264 in Resources */ = {isa = PBXBuildFile; fileRef = 3A095EE224CD8DAE003FC082 /* test.264 */; };
+		3AE032DA24D03A4B003C7B31 /* doublesky_rtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE032D824D03A4B003C7B31 /* doublesky_rtmp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +59,7 @@
 		3A095E3124CD862C003FC082 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		3A095E3224CD862C003FC082 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		3A095E3424CD862C003FC082 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3A095E3524CD862C003FC082 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3A095E3524CD862C003FC082 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		3A095E3824CD862C003FC082 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A095E3A24CD862F003FC082 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A095E3D24CD862F003FC082 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -71,8 +71,6 @@
 		3A095E5124CD862F003FC082 /* rtmp_moduleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rtmp_moduleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A095E5524CD862F003FC082 /* rtmp_moduleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rtmp_moduleUITests.m; sourceTree = "<group>"; };
 		3A095E5724CD862F003FC082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A095E6324CD88F6003FC082 /* doublesky_rtmp_push.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = doublesky_rtmp_push.h; sourceTree = "<group>"; };
-		3A095E6424CD88F6003FC082 /* doublesky_rtmp_push.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = doublesky_rtmp_push.mm; sourceTree = "<group>"; };
 		3A095E6824CD890A003FC082 /* aacdecoder_lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aacdecoder_lib.h; sourceTree = "<group>"; };
 		3A095E6924CD890A003FC082 /* machine_type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = machine_type.h; sourceTree = "<group>"; };
 		3A095E6A24CD890A003FC082 /* aacenc_lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aacenc_lib.h; sourceTree = "<group>"; };
@@ -167,6 +165,8 @@
 		3A095EDD24CD8A21003FC082 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		3A095EDE24CD8A36003FC082 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		3A095EE224CD8DAE003FC082 /* test.264 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.264; sourceTree = "<group>"; };
+		3AE032D824D03A4B003C7B31 /* doublesky_rtmp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = doublesky_rtmp.cpp; sourceTree = "<group>"; };
+		3AE032D924D03A4B003C7B31 /* doublesky_rtmp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = doublesky_rtmp.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,9 +233,9 @@
 				3A095E3124CD862C003FC082 /* SceneDelegate.h */,
 				3A095E3224CD862C003FC082 /* SceneDelegate.m */,
 				3A095E3424CD862C003FC082 /* ViewController.h */,
-				3A095E3524CD862C003FC082 /* ViewController.m */,
-				3A095E6324CD88F6003FC082 /* doublesky_rtmp_push.h */,
-				3A095E6424CD88F6003FC082 /* doublesky_rtmp_push.mm */,
+				3A095E3524CD862C003FC082 /* ViewController.mm */,
+				3AE032D924D03A4B003C7B31 /* doublesky_rtmp.hpp */,
+				3AE032D824D03A4B003C7B31 /* doublesky_rtmp.cpp */,
 				3A095E3724CD862C003FC082 /* Main.storyboard */,
 				3A095E3A24CD862F003FC082 /* Assets.xcassets */,
 				3A095E3C24CD862F003FC082 /* LaunchScreen.storyboard */,
@@ -620,9 +620,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A095E3624CD862C003FC082 /* ViewController.m in Sources */,
+				3A095E3624CD862C003FC082 /* ViewController.mm in Sources */,
+				3AE032DA24D03A4B003C7B31 /* doublesky_rtmp.cpp in Sources */,
 				3A095E3024CD862C003FC082 /* AppDelegate.m in Sources */,
-				3A095E6524CD88F7003FC082 /* doublesky_rtmp_push.mm in Sources */,
 				3A095E4124CD862F003FC082 /* main.m in Sources */,
 				3A095E3324CD862C003FC082 /* SceneDelegate.m in Sources */,
 			);
@@ -796,6 +796,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DQFEA2B5H2;
 				ENABLE_BITCODE = NO;
+				GCC_INPUT_FILETYPE = automatic;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/rtmp_module/x264/include",
 					"$(PROJECT_DIR)/rtmp_module/fdk-aac/include",
@@ -825,6 +826,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DQFEA2B5H2;
 				ENABLE_BITCODE = NO;
+				GCC_INPUT_FILETYPE = automatic;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/rtmp_module/x264/include",
 					"$(PROJECT_DIR)/rtmp_module/fdk-aac/include",
