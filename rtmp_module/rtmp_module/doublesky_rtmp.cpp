@@ -63,7 +63,8 @@ void doublesky_rtmp::stop_rtmp()
 
 int doublesky_rtmp::p_start_rtmp()
 {
-    char *rtmp_url = (char*)"rtmp://172.16.7.31:1935/zbcs/room";
+    // rtmp://172.16.7.229:1935/zbcs/room
+    char *rtmp_url = (char*)"rtmp://108588.livepush.myqcloud.com/live/doublesky?txSecret=79819f780871f153514b80395b2633db&txTime=5F4CD6CC";
     ffmpeg_clean.format_context = avformat_alloc_context();
     if (!ffmpeg_clean.format_context)
         return -1;
@@ -78,12 +79,17 @@ int doublesky_rtmp::p_start_rtmp()
     if (!ffmpeg_clean.video_stream)
         return -1;
     
+//    AVCodec *audio_codec = avcodec_find_encoder(AV_CODEC_ID_AAC);
+//    ffmpeg_clean.video_stream = avformat_new_stream(ffmpeg_clean.format_context, audio_codec);
+//    if (!ffmpeg_clean.audio_stream)
+//        return -1;
+    
     if (!(ffmpeg_clean.format_context->oformat = av_guess_format("flv", rtmp_url, NULL)))
         return -1;
     
     ffmpeg_clean.video_stream->codec->bit_rate = 40000;
     ffmpeg_clean.video_stream->codec->width = 640;
-    ffmpeg_clean.video_stream->codec->height = 368;
+    ffmpeg_clean.video_stream->codec->height = 352;
     ffmpeg_clean.video_stream->codec->gop_size = 30;
     ffmpeg_clean.video_stream->codec->pix_fmt = AV_PIX_FMT_YUV420P;
     ffmpeg_clean.video_stream->codec->time_base.den = 30;
@@ -97,7 +103,7 @@ int doublesky_rtmp::p_start_rtmp()
     
     // 这里因为调试方便自己写死了sps跟pps
 //    static unsigned char sps_pps[] = {0x00, 0x00, 0x00, 0x01, 0x27, 0x64,  0x00, 0x1E, 0xAC, 0x56, 0xC1, 0x70, 0x51, 0xA6, 0xA0, 0x20, 0x20, 0x20, 0x40, 0x00, 0x00, 0x00, 0x01, 0x28, 0xEE, 0x3C, 0xB0};
-    static unsigned char sps_pps[] = {0x00, 0x00, 0x00, 0x01, 0x67, 0x64, 0x00, 0x1E, 0xAC, 0xD9, 0x40, 0xA0, 0x2D, 0xA1, 0x00, 0x00, 0x03, 0x00, 0x01, 0x00, 0x00, 0x03, 0x00, 0x32, 0x0F, 0x16, 0x2D, 0x96, 0x00, 0x00, 0x00, 0x01, 0x68, 0xEB, 0xE3, 0xCB, 0x22, 0xC0};
+    static unsigned char sps_pps[] = {0x00, 0x00, 0x00, 0x01, 0x67, 0x64, 0x00, 0x1E, 0xAC, 0xB2, 0x01, 0x40, 0x5B, 0x42, 0x00, 0x00, 0x03, 0x00, 0x02, 0x00, 0x00, 0x03, 0x00, 0x64, 0x1E, 0x2C, 0x5C, 0x90, 0x00, 0x00, 0x00, 0x01, 0x68, 0xEB, 0xC3, 0xCB, 0x22, 0xC0};
     char *tmp_sps_pps = (char*)calloc(1, sizeof(sps_pps));
     memcpy(tmp_sps_pps, sps_pps, sizeof(sps_pps));
     ffmpeg_clean.video_stream->codec->extradata = (uint8_t*)tmp_sps_pps;
@@ -111,13 +117,24 @@ int doublesky_rtmp::p_start_rtmp()
     return 0;
 }
 
-static char start_code[4] = {0x00, 0x00, 0x00, 0x01};
+static char start_code_3[3] = {0x00, 0x00, 0x01};
+static char start_code_4[4] = {0x00, 0x00, 0x00, 0x01};
 void doublesky_rtmp::push_rtmp(const char *buffer, const int size)
 {
-    if (!open_success || memcmp(buffer, start_code, 4) != 0)
+    if (!open_success)
         return;
     
-    int naltype = buffer[4] & 0x1F;
+    int start_length = 0;
+    if (memcmp(buffer, start_code_3, 3) == 0)
+        start_length = 3;
+    
+    if (memcmp(buffer, start_code_4, 4) == 0)
+        start_length = 4;
+    
+    if (start_length == 0)
+        return;
+    
+    int naltype = buffer[start_length] & 0x1F;
     if (naltype != 0x01 && naltype != 0x05)
         return;
     
