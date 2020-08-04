@@ -63,8 +63,7 @@ void doublesky_rtmp::stop_rtmp()
 
 int doublesky_rtmp::p_start_rtmp()
 {
-    // rtmp://172.16.7.229:1935/zbcs/room
-    char *rtmp_url = (char*)"rtmp://108588.livepush.myqcloud.com/live/doublesky?txSecret=79819f780871f153514b80395b2633db&txTime=5F4CD6CC";
+    char *rtmp_url = (char*)"rtmp://172.16.7.229:1935/zbcs/room";
     ffmpeg_clean.format_context = avformat_alloc_context();
     if (!ffmpeg_clean.format_context)
         return -1;
